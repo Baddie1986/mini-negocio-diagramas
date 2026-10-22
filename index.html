@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagramas UML y de Planeación - Proyecto Mininegocio</title>
+    <!-- Tailwind CSS para estilos rápidos y minimalistas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        /* Contenedor responsivo para diagramas anchos */
+        .diagram-container {
+            overflow-x: auto;
+            background-color: #fafafa;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Títulos de sección */
+        h2 {
+            border-bottom: 2px solid #000000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            margin-top: 2.5rem;
+            font-weight: 600;
+            font-size: 1.25rem;
+            color: #111827;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen pb-12">
+
+    <!-- Encabezado / Portada -->
+    <header class="max-w-4xl mx-auto pt-16 pb-8 px-6 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">Diagramas UML y de Planeación</h1>
+        <h3 class="text-xl md:text-2xl text-gray-700 mb-6 font-light">Proyecto "Mininegocio"</h3>
+        
+        <div class="inline-block text-left bg-gray-50 border border-gray-300 p-6 rounded-lg shadow-sm">
+            <p class="text-lg font-semibold uppercase tracking-wide">Jaime Jimenez Gonzalez</p>
+            <p class="text-gray-600 mt-1">Ing. en Desarrollo de Aplicaciones</p>
+            <p class="text-gray-500 text-sm mt-1">5to Semestre</p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="max-w-4xl mx-auto px-6">
+
+        <!-- 1. Diagrama de Casos de Uso -->
+        <section>
+            <h2>1. Diagrama de Casos de Uso (Interacciones)</h2>
+            <p class="text-sm text-gray-600 mb-4">Representación de los actores del sistema y las funciones principales que pueden ejecutar dentro de la plataforma.</p>
+            <div class="diagram-container">
+                <div class="mermaid">
+flowchart LR
+    subgraph Usuarios
+        C((Cliente))
+        E((Emprendedor))
+    end
+    subgraph Plataforma Mininegocio
+        UC1(Registrarse / Iniciar Sesión)
+        UC2(Buscar Negocio por Categoría)
+        UC3(Ver Perfil y Catálogo)
+        UC4(Contactar vía WhatsApp)
+        UC5(Dejar Reseña)
+        UC6(Crear/Editar Perfil de Negocio)
+        UC7(Subir Fotos de Productos)
+    end
+    C --> UC1
+    C --> UC2
+    C --> UC3
+    C --> UC4
+    C --> UC5
+    E --> UC1
+    E --> UC6
+    E --> UC7
+    E --> UC4
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Diagrama de Flujo -->
+        <section>
+            <h2>2. Diagrama de Flujo de Procesos</h2>
+            <p class="text-sm text-gray-600 mb-4">Secuencia lógica que sigue un cliente desde que abre la aplicación hasta que contacta al vendedor.</p>
+            <div class="diagram-container">
+                <div class="mermaid">
+flowchart TD
+    A([Inicio: Cliente abre la App]) --> B{¿Tiene sesión iniciada?}
+    B -- No --> C[Registrarse o Iniciar Sesión]
+    C --> D
+    B -- Sí --> D[Pantalla Principal: Buscador]
+    D --> E[Ingresa palabra clave o selecciona categoría]
+    E --> F[El sistema filtra la Base de Datos NoSQL]
+    F --> G[Muestra lista de mininegocios cercanos]
+    G --> H[Cliente selecciona un negocio]
+    H --> I[Ver detalles, fotos y ubicación]
+    I --> J{¿Le interesa comprar?}
+    J -- No --> D
+    J -- Sí --> K[Clic en botón 'Contactar por WhatsApp']
+    K --> L[El sistema redirige a la app de WhatsApp]
+    L --> M([Fin: Cierran el trato externamente])
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Diagrama de Gantt -->
+        <section>
+            <h2>3. Diagrama de Gantt (Planeación)</h2>
+            <p class="text-sm text-gray-600 mb-4">Cronograma de actividades para el ciclo de vida del software durante el semestre.</p>
+            <div class="diagram-container">
+                <div class="mermaid">
+gantt
+    title Cronograma de Desarrollo - Mininegocio
+    dateFormat  YYYY-MM-DD
+    section 1. Análisis
+    Definición del Problema         :done, a1, 2026-09-15, 10d
+    Levantamiento de Requisitos     :done, a2, 2026-09-25, 19d
+    section 2. Diseño UML
+    Diseño de Casos y Flujo         :done, d1, 2026-10-14, 7d
+    Diagramas de Clase y Secuencia  :active, d2, 2026-10-21, 7d
+    Diseño de Interfaz (UI/UX)      :d3, after d2, 10d
+    section 3. Desarrollo
+    Configuración BD                :dev1, 2026-11-08, 7d
+    Módulo Usuarios                 :dev2, after dev1, 10d
+    Integración WhatsApp            :dev3, after dev2, 8d
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Diagrama de Clases -->
+        <section>
+            <h2>4. Diagrama de Clases (Estructura)</h2>
+            <p class="text-sm text-gray-600 mb-4">Modelado de la base de datos orientada a objetos, mostrando herencia y relaciones entre entidades.</p>
+            <div class="diagram-container">
+                <div class="mermaid">
+classDiagram
+    class Usuario {
+        +int id_usuario
+        +String nombre
+        +String telefono
+        +iniciarSesion() bool
+    }
+    class Emprendedor {
+        +String rfc_opcional
+        +verEstadisticas() void
+    }
+    class Cliente {
+        +String ubicacion_gps
+        +buscarNegocios() List
+    }
+    class Negocio {
+        -int id_negocio
+        -String nombre
+        -String num_whatsapp
+        +actualizarDatos() void
+    }
+    class Producto {
+        -int id_producto
+        -String nombre
+        -float precio
+        +subirFoto() void
+    }
+    Usuario <|-- Emprendedor
+    Usuario <|-- Cliente
+    Emprendedor "1" -- "1" Negocio : administra
+    Negocio "1" *-- "1..*" Producto : ofrece
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Diagrama de Secuencia -->
+        <section>
+            <h2>5. Diagrama de Secuencia</h2>
+            <p class="text-sm text-gray-600 mb-4">Muestra la comunicación temporal de los mensajes entre el cliente, la interfaz, la base de datos y el vendedor.</p>
+            <div class="diagram-container">
+                <div class="mermaid">
+sequenceDiagram
+    actor Cliente
+    participant App as Interfaz App
+    participant BD as Base de Datos
+    actor Vendedor as WhatsApp Emprendedor
+
+    Cliente->>App: Ingresa categoría (ej. Comida)
+    App->>BD: Consultar negocios cercanos
+    BD-->>App: Retornar lista de negocios
+    App-->>Cliente: Mostrar lista en pantalla
+    Cliente->>App: Selecciona perfil
+    App-->>Cliente: Muestra fotos y botón WhatsApp
+    Cliente->>App: Clic en Contactar
+    App->>Vendedor: Redirige y abre chat
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-4xl mx-auto px-6 mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+        &copy; 2026 Jaime Jimenez Gonzalez. Proyecto académico para la asignatura Fundamentos de Desarrollo.
+    </footer>
+
+    <!-- Inicialización de Mermaid.js -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        
+        // Configuración para forzar un tema en escala de grises/neutral
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            securityLevel: 'loose',
+            fontFamily: 'Inter, sans-serif'
+        });
+    </script>
+</body>
+</html>
